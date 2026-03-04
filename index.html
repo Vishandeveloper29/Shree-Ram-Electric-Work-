@@ -5,9 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shree Ram Electric Works – Admin Panel</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -21,10 +19,8 @@
                 <h2>Shree Ram Electric Works</h2>
                 <p>Motor Data Management System — Admin</p>
             </div>
-            <div class="form-field"><label>Username</label><input type="text" id="loginUser"
-                    placeholder="Enter username" autocomplete="username" /></div>
-            <div class="form-field"><label>Password</label><input type="password" id="loginPass"
-                    placeholder="Enter password" autocomplete="current-password" /></div>
+            <div class="form-field"><label>Username</label><input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" /></div>
+            <div class="form-field"><label>Password</label><input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" /></div>
             <button class="login-btn" onclick="doLogin()">Login to Admin Panel</button>
             <div class="login-err" id="loginErr">❌ Invalid username or password</div>
         </div>
@@ -38,13 +34,10 @@
             </div>
             <nav class="sidebar-nav">
                 <div class="nav-section">Main</div>
-                <div class="nav-item active" onclick="showPage('dashboard',this)"><span
-                        class="ni-icon">📊</span>Dashboard</div>
-                <div class="nav-item" onclick="showPage('motors',this)"><span class="ni-icon">⚡</span>Motor Records
-                </div>
+                <div class="nav-item active" onclick="showPage('dashboard',this)"><span class="ni-icon">📊</span>Dashboard</div>
+                <div class="nav-item" onclick="showPage('motors',this)"><span class="ni-icon">⚡</span>Motor Records</div>
                 <div class="nav-section">Tools</div>
-                <div class="nav-item" onclick="showPage('export',this)"><span class="ni-icon">📤</span>Export / Import
-                </div>
+                <div class="nav-item" onclick="showPage('export',this)"><span class="ni-icon">📤</span>Export / Import</div>
                 <div class="nav-item" onclick="showPage('settings',this)"><span class="ni-icon">⚙️</span>Settings</div>
             </nav>
             <div class="sidebar-footer">
@@ -106,8 +99,7 @@
                 <div class="table-card">
                     <div class="table-toolbar">
                         <h3>⚡ Motor Records</h3>
-                        <input class="search-input" id="motorSearch" placeholder="🔍 Search motors..."
-                            oninput="filterMotors()" />
+                        <input class="search-input" id="motorSearch" placeholder="🔍 Search motors..." oninput="filterMotors()" />
                         <select class="sel-filter" id="typeFilter" onchange="filterMotors()">
                             <option value="">All Types</option>
                             <option>AC</option>
@@ -172,11 +164,8 @@
                         <button class="btn btn-light" onclick="copyTable()">📋 Copy TSV</button>
                     </div>
                 </div>
-                <h3
-                    style="margin-bottom:14px;font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy)">
-                    📂 Import JSON Backup</h3>
-                <div class="drop-zone" id="dropZone" onclick="document.getElementById('importFile').click()"
-                    ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+                <h3 style="margin-bottom:14px;font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy)">📂 Import JSON Backup</h3>
+                <div class="drop-zone" id="dropZone" onclick="document.getElementById('importFile').click()" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
                     <div class="dz-icon">📁</div>
                     <p style="color:var(--muted)">Click or drag & drop JSON file here</p>
                 </div>
@@ -188,18 +177,14 @@
             <div class="page-content" id="page-settings">
                 <div class="settings-card">
                     <h3>🔑 Change Admin Password</h3>
-                    <div class="fg" style="margin-bottom:14px"><label>Current Password</label><input type="password"
-                            id="curPass" placeholder="Enter current password" /></div>
-                    <div class="fg" style="margin-bottom:14px"><label>New Password</label><input type="password"
-                            id="newPass" placeholder="Enter new password (min 6 chars)" /></div>
-                    <div class="fg" style="margin-bottom:20px"><label>Confirm New Password</label><input type="password"
-                            id="conPass" placeholder="Confirm new password" /></div>
+                    <div class="fg" style="margin-bottom:14px"><label>Current Password</label><input type="password" id="curPass" placeholder="Enter current password" /></div>
+                    <div class="fg" style="margin-bottom:14px"><label>New Password</label><input type="password" id="newPass" placeholder="Enter new password (min 6 chars)" /></div>
+                    <div class="fg" style="margin-bottom:20px"><label>Confirm New Password</label><input type="password" id="conPass" placeholder="Confirm new password" /></div>
                     <button class="btn btn-orange" onclick="changePassword()">💾 Update Password</button>
                 </div>
                 <div class="settings-card">
                     <h3>🗑️ Danger Zone</h3>
-                    <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px">Permanently delete all motor
-                        records. This cannot be undone.</p>
+                    <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px">Permanently delete all motor records. This cannot be undone.</p>
                     <button class="btn btn-red" onclick="clearAllData()">🗑️ Clear All Data</button>
                 </div>
             </div>
@@ -220,12 +205,9 @@
 
                 <!-- Phase Toggle -->
                 <div style="margin-bottom:20px">
-                    <label
-                        style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:10px">Motor
-                        Phase</label>
+                    <label style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:10px">Motor Phase</label>
                     <div class="phase-toggle">
-                        <button class="phase-btn active" id="phBtn1" onclick="setPhase('Single')">🔌 Single
-                            Phase</button>
+                        <button class="phase-btn active" id="phBtn1" onclick="setPhase('Single')">🔌 Single Phase</button>
                         <button class="phase-btn" id="phBtn3" onclick="setPhase('Three')">⚡ Three Phase</button>
                     </div>
                 </div>
@@ -234,45 +216,33 @@
                 <div class="form-section">
                     <div class="form-section-title"><span class="fs-icon">🏷️</span>A. Nameplate Details</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Brand Name *</label><input type="text" id="f_brand"
-                                placeholder="e.g. Crompton" /></div>
-                        <div class="fg"><label>Manufacturer</label><input type="text" id="f_manufacturer"
-                                placeholder="e.g. Crompton Greaves" /></div>
+                        <div class="fg"><label>Brand Name *</label><input type="text" id="f_brand" placeholder="e.g. Crompton" /></div>
+                        <div class="fg"><label>Manufacturer</label><input type="text" id="f_manufacturer" placeholder="e.g. Crompton Greaves" /></div>
                         <div class="fg"><label>Motor Type *</label><select id="f_motorType">
-                                <option value="">Select</option>
-                                <option>AC</option>
-                                <option>DC</option>
-                            </select></div>
+                            <option value="">Select</option>
+                            <option>AC</option>
+                            <option>DC</option>
+                        </select></div>
                         <div class="fg"><label>Phase *</label><select id="f_phase" onchange="onPhaseChange()">
-                                <option value="">Select</option>
-                                <option>Single</option>
-                                <option>Three</option>
-                            </select></div>
-                        <div class="fg"><label>Rated Voltage (V) *</label><input type="text" id="f_ratedVoltage"
-                                placeholder="e.g. 230V / 415V" /></div>
-                        <div class="fg"><label>Rated Current (A) *</label><input type="text" id="f_ratedCurrent"
-                                placeholder="e.g. 7.5A" /></div>
-                        <div class="fg"><label>Rated Frequency (Hz)</label><input type="text" id="f_ratedFrequency"
-                                placeholder="e.g. 50Hz" /></div>
-                        <div class="fg"><label>Rated RPM *</label><input type="number" id="f_ratedRPM"
-                                placeholder="e.g. 1440" /></div>
-                        <div class="fg"><label>Rated Power (HP) *</label><input type="number" id="f_ratedPowerHP"
-                                step="0.01" placeholder="e.g. 1.5" oninput="autoKW()" /></div>
-                        <div class="fg"><label>Rated Power (kW) <span
-                                    style="color:var(--orange);font-size:.7rem">Auto</span></label><input type="text"
-                                id="f_ratedPowerKW" placeholder="Auto calculated" readonly style="background:#f8fafd" />
-                        </div>
+                            <option value="">Select</option>
+                            <option>Single</option>
+                            <option>Three</option>
+                        </select></div>
+                        <div class="fg"><label>Rated Voltage (V) *</label><input type="text" id="f_ratedVoltage" placeholder="e.g. 230V / 415V" /></div>
+                        <div class="fg"><label>Rated Current (A) *</label><input type="text" id="f_ratedCurrent" placeholder="e.g. 7.5A" /></div>
+                        <div class="fg"><label>Rated Frequency (Hz)</label><input type="text" id="f_ratedFrequency" placeholder="e.g. 50Hz" /></div>
+                        <div class="fg"><label>Rated RPM *</label><input type="number" id="f_ratedRPM" placeholder="e.g. 1440" /></div>
+                        <div class="fg"><label>Rated Power (HP) *</label><input type="number" id="f_ratedPowerHP" step="0.01" placeholder="e.g. 1.5" oninput="autoKW()" /></div>
+                        <div class="fg"><label>Rated Power (kW) <span style="color:var(--orange);font-size:.7rem">Auto</span></label><input type="text" id="f_ratedPowerKW" placeholder="Auto calculated" readonly style="background:#f8fafd" /></div>
                         <div class="fg"><label>Insulation Class</label><select id="f_insulationClass">
-                                <option value="">Select</option>
-                                <option>A</option>
-                                <option>B</option>
-                                <option>F</option>
-                                <option>H</option>
-                            </select></div>
-                        <div class="fg"><label>Efficiency %</label><input type="text" id="f_efficiency"
-                                placeholder="e.g. 87%" /></div>
-                        <div class="fg"><label>Frame Size</label><input type="text" id="f_frameSize"
-                                placeholder="e.g. D100L" /></div>
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>F</option>
+                            <option>H</option>
+                        </select></div>
+                        <div class="fg"><label>Efficiency %</label><input type="text" id="f_efficiency" placeholder="e.g. 87%" /></div>
+                        <div class="fg"><label>Frame Size</label><input type="text" id="f_frameSize" placeholder="e.g. D100L" /></div>
                     </div>
                 </div>
 
@@ -280,8 +250,7 @@
                 <div class="form-section">
                     <div class="form-section-title"><span class="fs-icon">⚡</span>B. Electrical Specifications</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Running Current (A)</label><input type="text" id="f_runningCurrent"
-                                placeholder="e.g. 7.2A" /></div>
+                        <div class="fg"><label>Running Current (A)</label><input type="text" id="f_runningCurrent" placeholder="e.g. 7.2A" /></div>
                     </div>
                 </div>
 
@@ -289,81 +258,78 @@
                 <div class="form-section">
                     <div class="form-section-title"><span class="fs-icon">🔩</span>C. Winding / Coil Details</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Stator Slot Count</label><input type="number" id="f_statorSlots"
-                                placeholder="e.g. 36" /></div>
-                        <div class="fg"><label>Slot Length (mm)</label><input type="text" id="f_slotLength"
-                                placeholder="e.g. 45mm" /></div>
-                        <div class="fg"><label>Total Coil Turns</label><input type="number" id="f_totalCoilTurns"
-                                placeholder="e.g. 720" /></div>
-                        <div class="fg"><label>Turns Per Coil</label><input type="number" id="f_turnsPerCoil"
-                                placeholder="e.g. 90" /></div>
-                        <div class="fg"><label>Coil Pitch</label><input type="text" id="f_coilPitch"
-                                placeholder="e.g. 1-8" /></div>
+                        <div class="fg"><label>Stator Slot Count</label><input type="number" id="f_statorSlots" placeholder="e.g. 36" /></div>
+                        <div class="fg"><label>Slot Length (mm)</label><input type="text" id="f_slotLength" placeholder="e.g. 45mm" /></div>
+                        <div class="fg"><label>Total Coil Turns</label><input type="number" id="f_totalCoilTurns" placeholder="e.g. 720" /></div>
+                        <div class="fg"><label>Turns Per Coil</label><input type="number" id="f_turnsPerCoil" placeholder="e.g. 90" /></div>
+                        <div class="fg"><label>Coil Pitch</label><input type="text" id="f_coilPitch" placeholder="e.g. 1-8" /></div>
                         <div class="fg"><label>Winding Connection</label><select id="f_windingConnection">
-                                <option value="">Select</option>
-                                <option>Star</option>
-                                <option>Delta</option>
-                                <option>Star/Delta</option>
-                            </select></div>
+                            <option value="">Select</option>
+                            <option>Star</option>
+                            <option>Delta</option>
+                            <option>Star/Delta</option>
+                        </select></div>
                         <div class="fg"><label>Coil Wire Type</label><select id="f_coilWireType">
-                                <option value="">Select</option>
-                                <option>Copper</option>
-                                <option>Aluminium</option>
-                            </select></div>
-                        <div class="fg"><label>Wire Gauge (SWG) *</label><input type="text" id="f_wireGauge"
-                                placeholder="e.g. 22 SWG" /></div>
-                        <div class="fg"><label>Coil Weight (kg) *</label><input type="text" id="f_coilWeight"
-                                placeholder="e.g. 1.2kg" /></div>
+                            <option value="">Select</option>
+                            <option>Copper</option>
+                            <option>Aluminium</option>
+                        </select></div>
+                        <div class="fg"><label>Wire Gauge (SWG) *</label><input type="text" id="f_wireGauge" placeholder="e.g. 22 SWG" /></div>
+                        <div class="fg"><label>Coil Weight (kg) *</label><input type="text" id="f_coilWeight" placeholder="e.g. 1.2kg" /></div>
                     </div>
 
                     <!-- Turns per Pitch dynamic section -->
                     <div style="margin-top:18px">
-                        <div class="form-section-title"
-                            style="font-size:.95rem;border-bottom:1px dashed var(--orange);margin-bottom:14px"><span
-                                class="fs-icon">🔢</span>Turns per Pitch</div>
+                        <div class="form-section-title" style="font-size:.95rem;border-bottom:1px dashed var(--orange);margin-bottom:14px"><span class="fs-icon">🔢</span>Turns per Pitch</div>
                         <div id="pitchTurnsContainer" style="display:flex;flex-direction:column;gap:10px"></div>
-                        <button type="button" class="btn btn-light" style="margin-top:12px;font-size:.82rem"
-                            onclick="addPitchRow()">➕ Add Pitch</button>
+                        <button type="button" class="btn btn-light" style="margin-top:12px;font-size:.82rem" onclick="addPitchRow()">➕ Add Pitch</button>
                     </div>
                 </div>
 
                 <!-- D: SINGLE PHASE EXTRA -->
                 <div class="form-section" id="singlePhaseSection">
-                    <div class="form-section-title"><span class="fs-icon">🔌</span>D. Single Phase — Starting & Running
-                        Coil</div>
+                    <div class="form-section-title"><span class="fs-icon">🔌</span>D. Single Phase — Starting & Running Coil</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Starting Coil Turns</label><input type="number" id="f_startingCoilTurns"
-                                placeholder="e.g. 480" /></div>
-                        <div class="fg"><label>Running Coil Turns</label><input type="number" id="f_runningCoilTurns"
-                                placeholder="e.g. 240" /></div>
-                        <div class="fg"><label>Starting Coil Weight (kg)</label><input type="text"
-                                id="f_startingCoilWeight" placeholder="e.g. 0.45kg" /></div>
-                        <div class="fg"><label>Running Coil Weight (kg)</label><input type="text"
-                                id="f_runningCoilWeight" placeholder="e.g. 0.75kg" /></div>
-                        <div class="fg"><label>Capacitor Value (µF)</label><input type="text" id="f_capacitorValue"
-                                placeholder="e.g. 25µF / 4µF" /></div>
+                        <div class="fg"><label>Starting Coil Turns</label><input type="number" id="f_startingCoilTurns" placeholder="e.g. 480" /></div>
+                        <div class="fg"><label>Running Coil Turns</label><input type="number" id="f_runningCoilTurns" placeholder="e.g. 240" /></div>
+                        <div class="fg"><label>Starting Coil Weight (kg)</label><input type="text" id="f_startingCoilWeight" placeholder="e.g. 0.45kg" /></div>
+                        <div class="fg"><label>Running Coil Weight (kg)</label><input type="text" id="f_runningCoilWeight" placeholder="e.g. 0.75kg" /></div>
+                        <div class="fg"><label>Capacitor Value (µF)</label><input type="text" id="f_capacitorValue" placeholder="e.g. 25µF / 4µF" /></div>
+                    </div>
+
+                    <!-- Starting Coil: Turns per Pitch -->
+                    <div style="margin-top:20px">
+                        <div style="font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding-bottom:8px;border-bottom:1px dashed var(--orange);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+                            <span>🔴</span>Starting Coil — Turns per Pitch
+                        </div>
+                        <div id="startingPitchContainer" style="display:flex;flex-direction:column;gap:10px"></div>
+                        <button type="button" class="btn btn-light" style="margin-top:10px;font-size:.82rem" onclick="addPitchRowTo('startingPitchContainer')">➕ Add Starting Pitch</button>
+                    </div>
+
+                    <!-- Running Coil: Turns per Pitch -->
+                    <div style="margin-top:20px">
+                        <div style="font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);padding-bottom:8px;border-bottom:1px dashed var(--orange);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+                            <span>🟢</span>Running Coil — Turns per Pitch
+                        </div>
+                        <div id="runningPitchContainer" style="display:flex;flex-direction:column;gap:10px"></div>
+                        <button type="button" class="btn btn-light" style="margin-top:10px;font-size:.82rem" onclick="addPitchRowTo('runningPitchContainer')">➕ Add Running Pitch</button>
                     </div>
                 </div>
 
                 <!-- E: THREE PHASE EXTRA -->
                 <div class="form-section" id="threePhaseSection" style="display:none">
-                    <div class="form-section-title"><span class="fs-icon">⚡</span>E. Three Phase — Electrical Details
-                    </div>
+                    <div class="form-section-title"><span class="fs-icon">⚡</span>E. Three Phase — Electrical Details</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Line Voltage (V)</label><input type="text" id="f_lineVoltage"
-                                placeholder="e.g. 415V" /></div>
-                        <div class="fg"><label>Phase Voltage (V)</label><input type="text" id="f_phaseVoltage"
-                                placeholder="e.g. 240V" /></div>
-                        <div class="fg"><label>Line Current (A)</label><input type="text" id="f_lineCurrent"
-                                placeholder="e.g. 7.5A" /></div>
-                        <div class="fg"><label>Phase Current (A)</label><input type="text" id="f_phaseCurrent"
-                                placeholder="e.g. 4.3A" /></div>
+                        <div class="fg"><label>Line Voltage (V)</label><input type="text" id="f_lineVoltage" placeholder="e.g. 415V" /></div>
+                        <div class="fg"><label>Phase Voltage (V)</label><input type="text" id="f_phaseVoltage" placeholder="e.g. 240V" /></div>
+                        <div class="fg"><label>Line Current (A)</label><input type="text" id="f_lineCurrent" placeholder="e.g. 7.5A" /></div>
+                        <div class="fg"><label>Phase Current (A)</label><input type="text" id="f_phaseCurrent" placeholder="e.g. 4.3A" /></div>
                         <div class="fg"><label>Star/Delta Connection</label><select id="f_starDeltaConn">
-                                <option value="">Select</option>
-                                <option>Star</option>
-                                <option>Delta</option>
-                                <option>Star-Delta Starter</option>
-                            </select></div>
+                            <option value="">Select</option>
+                            <option>Star</option>
+                            <option>Delta</option>
+                            <option>Star-Delta Starter</option>
+                        </select></div>
                     </div>
                 </div>
 
@@ -371,26 +337,19 @@
                 <div class="form-section">
                     <div class="form-section-title"><span class="fs-icon">⚙️</span>F. Mechanical Details</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Shaft Diameter (mm)</label><input type="text" id="f_shaftDiameter"
-                                placeholder="e.g. 28mm" /></div>
-                        <div class="fg"><label>Shaft Length (mm)</label><input type="text" id="f_shaftLength"
-                                placeholder="e.g. 60mm" /></div>
-                        <div class="fg"><label>Bearing Number Front</label><input type="text" id="f_bearingFront"
-                                placeholder="e.g. 6305" /></div>
-                        <div class="fg"><label>Bearing Number Rear</label><input type="text" id="f_bearingRear"
-                                placeholder="e.g. 6203" /></div>
-                        <div class="fg"><label>Fan Size (mm)</label><input type="text" id="f_fanSize"
-                                placeholder="e.g. 180mm" /></div>
-                        <div class="fg"><label>Fan Cover Size (mm)</label><input type="text" id="f_fanCoverSize"
-                                placeholder="e.g. 200mm" /></div>
-                        <div class="fg"><label>Total Motor Weight (kg)</label><input type="text" id="f_motorWeight"
-                                placeholder="e.g. 12.5kg" /></div>
+                        <div class="fg"><label>Shaft Diameter (mm)</label><input type="text" id="f_shaftDiameter" placeholder="e.g. 28mm" /></div>
+                        <div class="fg"><label>Shaft Length (mm)</label><input type="text" id="f_shaftLength" placeholder="e.g. 60mm" /></div>
+                        <div class="fg"><label>Bearing Number Front</label><input type="text" id="f_bearingFront" placeholder="e.g. 6305" /></div>
+                        <div class="fg"><label>Bearing Number Rear</label><input type="text" id="f_bearingRear" placeholder="e.g. 6203" /></div>
+                        <div class="fg"><label>Fan Size (mm)</label><input type="text" id="f_fanSize" placeholder="e.g. 180mm" /></div>
+                        <div class="fg"><label>Fan Cover Size (mm)</label><input type="text" id="f_fanCoverSize" placeholder="e.g. 200mm" /></div>
+                        <div class="fg"><label>Total Motor Weight (kg)</label><input type="text" id="f_motorWeight" placeholder="e.g. 12.5kg" /></div>
                         <div class="fg"><label>Body Material</label><select id="f_bodyMaterial">
-                                <option value="">Select</option>
-                                <option>Cast Iron</option>
-                                <option>Aluminium</option>
-                                <option>Steel</option>
-                            </select></div>
+                            <option value="">Select</option>
+                            <option>Cast Iron</option>
+                            <option>Aluminium</option>
+                            <option>Steel</option>
+                        </select></div>
                     </div>
                 </div>
 
@@ -398,13 +357,9 @@
                 <div class="form-section">
                     <div class="form-section-title"><span class="fs-icon">🔧</span>G. Repair & Service History</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Old Coil Weight (kg)</label><input type="text" id="f_oldCoilWeight"
-                                placeholder="e.g. 1.1kg" /></div>
-                        <div class="fg"><label>New Coil Weight (kg)</label><input type="text" id="f_newCoilWeight"
-                                placeholder="e.g. 1.2kg" /></div>
-                        <div class="fg full"><label>Notes / Observations</label><textarea id="f_notes"
-                                placeholder="Any additional notes, observations, or special instructions..."></textarea>
-                        </div>
+                        <div class="fg"><label>Old Coil Weight (kg)</label><input type="text" id="f_oldCoilWeight" placeholder="e.g. 1.1kg" /></div>
+                        <div class="fg"><label>New Coil Weight (kg)</label><input type="text" id="f_newCoilWeight" placeholder="e.g. 1.2kg" /></div>
+                        <div class="fg full"><label>Notes / Observations</label><textarea id="f_notes" placeholder="Any additional notes, observations, or special instructions..."></textarea></div>
                     </div>
                 </div>
 
@@ -446,5 +401,4 @@
 
     <script src="admin.js"></script>
 </body>
-
 </html>
