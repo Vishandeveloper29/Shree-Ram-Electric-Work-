@@ -168,12 +168,8 @@ if (sessionStorage.getItem(LS_SESSION) === "1") {
 // NAVIGATION
 // ============================
 function showPage(id, el) {
-  document
-    .querySelectorAll(".page-content")
-    .forEach((p) => p.classList.remove("active"));
-  document
-    .querySelectorAll(".nav-item")
-    .forEach((n) => n.classList.remove("active"));
+  document.querySelectorAll(".page-content").forEach((p) => p.classList.remove("active"));
+  document.querySelectorAll(".nav-item").forEach((n) => n.classList.remove("active"));
   document.getElementById("page-" + id).classList.add("active");
   el.classList.add("active");
   if (id === "dashboard") renderDashboard();
@@ -199,12 +195,8 @@ function renderDashboard() {
   const single = motors.filter((m) => m.phase === "Single").length;
   const three = motors.filter((m) => m.phase === "Three").length;
   const rewound = motors.filter((m) => m.newCoilWeight).length;
-  const avgHP = total
-    ? motors.reduce((s, m) => s + parseFloat(m.ratedPowerHP || 0), 0) / total
-    : 0;
-  const avgRPM = total
-    ? motors.reduce((s, m) => s + parseFloat(m.ratedRPM || 0), 0) / total
-    : 0;
+  const avgHP = total ? motors.reduce((s, m) => s + parseFloat(m.ratedPowerHP || 0), 0) / total : 0;
+  const avgRPM = total ? motors.reduce((s, m) => s + parseFloat(m.ratedRPM || 0), 0) / total : 0;
 
   document.getElementById("statsGrid").innerHTML = `
     <div class="stat-card c1"><div class="sc-icon">⚡</div><div class="sc-num">${total}</div><div class="sc-label">Total Motors</div></div>
@@ -226,37 +218,26 @@ function renderDashboard() {
   ];
   const maxT = Math.max(...typeData.map((t) => t[1]), 1);
   document.getElementById("typeChart").innerHTML = typeData
-    .map(
-      ([l, v], i) => `
+    .map(([l, v], i) => `
     <div class="bar-wrap"><div class="bar-lbl">${l}</div>
     <div class="bar-track"><div class="bar-fill${i === 1 ? " teal" : ""}" style="width:${((v / maxT) * 100).toFixed(1)}%"></div></div>
-    <div class="bar-val">${v}</div></div>`,
-    )
+    <div class="bar-val">${v}</div></div>`)
     .join("");
 
   const bc = {};
-  motors.forEach((m) => {
-    bc[m.brand] = (bc[m.brand] || 0) + 1;
-  });
-  const bArr = Object.entries(bc)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 6);
+  motors.forEach((m) => { bc[m.brand] = (bc[m.brand] || 0) + 1; });
+  const bArr = Object.entries(bc).sort((a, b) => b[1] - a[1]).slice(0, 6);
   const maxB = Math.max(...bArr.map((b) => b[1]), 1);
   document.getElementById("brandChart").innerHTML = bArr
-    .map(
-      ([b, v]) => `
+    .map(([b, v]) => `
     <div class="bar-wrap"><div class="bar-lbl" style="width:100px">${b}</div>
     <div class="bar-track"><div class="bar-fill" style="width:${((v / maxB) * 100).toFixed(1)}%"></div></div>
-    <div class="bar-val">${v}</div></div>`,
-    )
+    <div class="bar-val">${v}</div></div>`)
     .join("");
 
-  const recent = [...motors]
-    .sort((a, b) => (b.added || 0) - (a.added || 0))
-    .slice(0, 8);
+  const recent = [...motors].sort((a, b) => (b.added || 0) - (a.added || 0)).slice(0, 8);
   document.getElementById("recentBody").innerHTML = recent
-    .map(
-      (m) => `
+    .map((m) => `
     <tr>
       <td><div class="motor-name-cell"><strong>${m.brand}</strong><small>${m.frameSize || ""}</small></div></td>
       <td>${m.brand}</td>
@@ -264,8 +245,7 @@ function renderDashboard() {
       <td>${m.ratedRPM || "-"}</td>
       <td><span class="badge ${m.phase === "Three" ? "badge-3ph" : "badge-1ph"}">${m.phase || "-"} Phase</span></td>
       <td><span class="badge ${m.motorType === "AC" ? "badge-ac" : "badge-dc"}">${m.motorType || "-"}</span></td>
-    </tr>`,
-    )
+    </tr>`)
     .join("");
 }
 
@@ -284,33 +264,14 @@ function filterMotors() {
   const type = document.getElementById("typeFilter")?.value || "";
   const phase = document.getElementById("phaseFilter")?.value || "";
   mFiltered = motors.filter((m) => {
-    const txt = [
-      m.brand,
-      m.manufacturer,
-      m.frameSize,
-      m.ratedVoltage,
-      m.ratedPowerHP,
-      m.ratedRPM,
-      m.wireGauge,
-    ]
-      .join(" ")
-      .toLowerCase();
-    return (
-      (!q || txt.includes(q)) &&
-      (!type || m.motorType === type) &&
-      (!phase || m.phase === phase)
-    );
+    const txt = [m.brand, m.manufacturer, m.frameSize, m.ratedVoltage, m.ratedPowerHP, m.ratedRPM, m.wireGauge]
+      .join(" ").toLowerCase();
+    return (!q || txt.includes(q)) && (!type || m.motorType === type) && (!phase || m.phase === phase);
   });
   mFiltered.sort((a, b) => {
-    let av = a[mSort] || "",
-      bv = b[mSort] || "";
-    if (!isNaN(av) && !isNaN(bv)) {
-      av = parseFloat(av);
-      bv = parseFloat(bv);
-    } else {
-      av = String(av).toLowerCase();
-      bv = String(bv).toLowerCase();
-    }
+    let av = a[mSort] || "", bv = b[mSort] || "";
+    if (!isNaN(av) && !isNaN(bv)) { av = parseFloat(av); bv = parseFloat(bv); }
+    else { av = String(av).toLowerCase(); bv = String(bv).toLowerCase(); }
     return av < bv ? -mSortDir : av > bv ? mSortDir : 0;
   });
   mPage = 1;
@@ -319,10 +280,7 @@ function filterMotors() {
 
 function sortMotors(col) {
   if (mSort === col) mSortDir *= -1;
-  else {
-    mSort = col;
-    mSortDir = 1;
-  }
+  else { mSort = col; mSortDir = 1; }
   filterMotors();
 }
 
@@ -332,9 +290,7 @@ function renderMotorsTable() {
   if (!slice.length) {
     tb.innerHTML = `<tr><td colspan="11"><div class="empty-state"><div class="es-icon">🔍</div><p>No motors found</p></div></td></tr>`;
   } else {
-    tb.innerHTML = slice
-      .map(
-        (m) => `
+    tb.innerHTML = slice.map((m) => `
       <tr>
         <td><div class="motor-name-cell"><strong>${m.brand}</strong><small>${m.frameSize || ""}</small></div></td>
         <td>${m.frameSize || "-"}</td>
@@ -351,36 +307,29 @@ function renderMotorsTable() {
           <button class="btn btn-orange btn-sm" onclick="openEditModal(${m.id})" style="margin:0 4px">✏️</button>
           <button class="btn btn-red btn-sm" onclick="openDeleteConfirm(${m.id})">🗑️</button>
         </td>
-      </tr>`,
-      )
-      .join("");
+      </tr>`).join("");
   }
   const tp = Math.ceil(mFiltered.length / M_PER) || 1;
   let pg = `<span class="pg-info">${mFiltered.length} record${mFiltered.length !== 1 ? "s" : ""}</span>`;
   if (tp > 1) {
-    if (mPage > 1)
-      pg += `<button class="pg-btn" onclick="goMPage(${mPage - 1})">‹</button>`;
+    if (mPage > 1) pg += `<button class="pg-btn" onclick="goMPage(${mPage - 1})">‹</button>`;
     for (let i = 1; i <= tp; i++) {
       if (i === 1 || i === tp || Math.abs(i - mPage) <= 1)
         pg += `<button class="pg-btn${i === mPage ? " active" : ""}" onclick="goMPage(${i})">${i}</button>`;
       else if (Math.abs(i - mPage) === 2)
         pg += `<span style="padding:0 4px;color:var(--muted)">…</span>`;
     }
-    if (mPage < tp)
-      pg += `<button class="pg-btn" onclick="goMPage(${mPage + 1})">›</button>`;
+    if (mPage < tp) pg += `<button class="pg-btn" onclick="goMPage(${mPage + 1})">›</button>`;
   }
   document.getElementById("motorPagination").innerHTML = pg;
 }
-function goMPage(p) {
-  mPage = p;
-  renderMotorsTable();
-}
+function goMPage(p) { mPage = p; renderMotorsTable(); }
 
 // ============================
 // PITCH TURNS DYNAMIC ROWS
 // ============================
-function addPitchRow(pitch = "", turns = "") {
-  const container = document.getElementById("pitchTurnsContainer");
+function addPitchRowTo(containerId, pitch = "", turns = "") {
+  const container = document.getElementById(containerId);
   const row = document.createElement("div");
   row.className = "pitch-row";
   row.style.cssText = "display:flex;align-items:center;gap:10px";
@@ -401,8 +350,13 @@ function addPitchRow(pitch = "", turns = "") {
   container.appendChild(row);
 }
 
-function getPitchTurns() {
-  const rows = document.querySelectorAll("#pitchTurnsContainer .pitch-row");
+// Legacy alias for general winding pitch
+function addPitchRow(pitch = "", turns = "") {
+  addPitchRowTo("pitchTurnsContainer", pitch, turns);
+}
+
+function getRowsFrom(containerId) {
+  const rows = document.querySelectorAll(`#${containerId} .pitch-row`);
   const result = [];
   rows.forEach((row) => {
     const pitch = row.querySelector(".pitch-input").value.trim();
@@ -412,12 +366,18 @@ function getPitchTurns() {
   return result;
 }
 
-function renderPitchTurns(arr) {
-  document.getElementById("pitchTurnsContainer").innerHTML = "";
-  if (arr && arr.length) {
-    arr.forEach((item) => addPitchRow(item.pitch, item.turns));
-  }
+function getPitchTurns()        { return getRowsFrom("pitchTurnsContainer"); }
+function getStartingPitchTurns(){ return getRowsFrom("startingPitchContainer"); }
+function getRunningPitchTurns() { return getRowsFrom("runningPitchContainer"); }
+
+function renderPitchRows(containerId, arr) {
+  document.getElementById(containerId).innerHTML = "";
+  if (arr && arr.length) arr.forEach((item) => addPitchRowTo(containerId, item.pitch, item.turns));
 }
+
+function renderPitchTurns(arr)        { renderPitchRows("pitchTurnsContainer", arr); }
+function renderStartingPitchTurns(arr){ renderPitchRows("startingPitchContainer", arr); }
+function renderRunningPitchTurns(arr) { renderPitchRows("runningPitchContainer", arr); }
 
 // ============================
 // ADD / EDIT MOTOR
@@ -429,10 +389,8 @@ function setPhase(p) {
   currentPhase = p;
   document.getElementById("phBtn1").classList.toggle("active", p === "Single");
   document.getElementById("phBtn3").classList.toggle("active", p === "Three");
-  document.getElementById("singlePhaseSection").style.display =
-    p === "Single" ? "" : "none";
-  document.getElementById("threePhaseSection").style.display =
-    p === "Three" ? "" : "none";
+  document.getElementById("singlePhaseSection").style.display = p === "Single" ? "" : "none";
+  document.getElementById("threePhaseSection").style.display = p === "Three" ? "" : "none";
   document.getElementById("f_phase").value = p;
 }
 function onPhaseChange() {
@@ -440,67 +398,33 @@ function onPhaseChange() {
 }
 function autoKW() {
   const hp = parseFloat(document.getElementById("f_ratedPowerHP").value) || 0;
-  document.getElementById("f_ratedPowerKW").value = hp
-    ? (hp * 0.7457).toFixed(4)
-    : "";
+  document.getElementById("f_ratedPowerKW").value = hp ? (hp * 0.7457).toFixed(4) : "";
 }
 
 const FIELDS = [
-  "brand",
-  "manufacturer",
-  "motorType",
-  "phase",
-  "ratedVoltage",
-  "ratedCurrent",
-  "ratedFrequency",
-  "ratedRPM",
-  "ratedPowerHP",
-  "ratedPowerKW",
-  "insulationClass",
-  "efficiency",
-  "frameSize",
+  "brand", "manufacturer", "motorType", "phase",
+  "ratedVoltage", "ratedCurrent", "ratedFrequency", "ratedRPM",
+  "ratedPowerHP", "ratedPowerKW", "insulationClass", "efficiency", "frameSize",
   "runningCurrent",
-  "statorSlots",
-  "slotLength",
-  "totalCoilTurns",
-  "turnsPerCoil",
-  "coilPitch",
-  "windingConnection",
-  "coilWireType",
-  "wireGauge",
-  "coilWeight",
-  "startingCoilTurns",
-  "runningCoilTurns",
-  "startingCoilWeight",
-  "runningCoilWeight",
-  "capacitorValue",
-  "lineVoltage",
-  "phaseVoltage",
-  "lineCurrent",
-  "phaseCurrent",
-  "starDeltaConn",
-  "shaftDiameter",
-  "shaftLength",
-  "bearingFront",
-  "bearingRear",
-  "fanSize",
-  "fanCoverSize",
-  "motorWeight",
-  "bodyMaterial",
-  "oldCoilWeight",
-  "newCoilWeight",
-  "notes",
+  "statorSlots", "slotLength", "totalCoilTurns", "turnsPerCoil",
+  "coilPitch", "windingConnection", "coilWireType", "wireGauge", "coilWeight",
+  "startingCoilTurns", "runningCoilTurns", "startingCoilWeight", "runningCoilWeight", "capacitorValue",
+  "lineVoltage", "phaseVoltage", "lineCurrent", "phaseCurrent", "starDeltaConn",
+  "shaftDiameter", "shaftLength", "bearingFront", "bearingRear",
+  "fanSize", "fanCoverSize", "motorWeight", "bodyMaterial",
+  "oldCoilWeight", "newCoilWeight", "notes",
 ];
 
 function openAddModal() {
   editingId = null;
-  document.getElementById("mModalTitle").textContent =
-    "➕ Add New Motor Record";
+  document.getElementById("mModalTitle").textContent = "➕ Add New Motor Record";
   FIELDS.forEach((f) => {
     const el = document.getElementById("f_" + f);
     if (el) el.value = "";
   });
   renderPitchTurns([]);
+  renderStartingPitchTurns([]);
+  renderRunningPitchTurns([]);
   setPhase("Single");
   document.getElementById("motorModal").style.display = "flex";
 }
@@ -515,6 +439,8 @@ function openEditModal(id) {
     if (el) el.value = m[f] || "";
   });
   renderPitchTurns(m.pitchTurns || []);
+  renderStartingPitchTurns(m.startingPitchTurns || []);
+  renderRunningPitchTurns(m.runningPitchTurns || []);
   setPhase(m.phase === "Three" ? "Three" : "Single");
   document.getElementById("motorModal").style.display = "flex";
 }
@@ -537,18 +463,16 @@ function saveMotor() {
   const motors = getMotors();
   const obj = {
     id: editingId || Date.now(),
-    added: editingId
-      ? motors.find((m) => m.id === editingId)?.added || Date.now()
-      : Date.now(),
+    added: editingId ? motors.find((m) => m.id === editingId)?.added || Date.now() : Date.now(),
   };
   FIELDS.forEach((f) => {
     const el = document.getElementById("f_" + f);
     if (el) obj[f] = el.value.trim();
   });
-  obj.ratedPowerKW = obj.ratedPowerHP
-    ? (parseFloat(obj.ratedPowerHP) * 0.7457).toFixed(4)
-    : obj.ratedPowerKW;
+  obj.ratedPowerKW = obj.ratedPowerHP ? (parseFloat(obj.ratedPowerHP) * 0.7457).toFixed(4) : obj.ratedPowerKW;
   obj.pitchTurns = getPitchTurns();
+  obj.startingPitchTurns = getStartingPitchTurns();
+  obj.runningPitchTurns = getRunningPitchTurns();
 
   let updated;
   if (editingId) {
@@ -569,39 +493,49 @@ function saveMotor() {
 function openDetail(id) {
   const m = getMotors().find((x) => x.id === id);
   if (!m) return;
-  document.getElementById("detailTitle").textContent =
-    `${m.brand} — ${m.frameSize || "Motor Detail"}`;
-  document.getElementById("detailEditBtn").onclick = () => {
-    closeDetail();
-    openEditModal(id);
-  };
+  document.getElementById("detailTitle").textContent = `${m.brand} — ${m.frameSize || "Motor Detail"}`;
+  document.getElementById("detailEditBtn").onclick = () => { closeDetail(); openEditModal(id); };
 
   const sec = (title, icon, items) => {
     const filled = items.filter(([l, v]) => v);
     if (!filled.length) return "";
     return `<div class="detail-section">
       <div class="detail-section-title"><span>${icon}</span>${title}</div>
-      <div class="detail-grid">${filled
-        .map(
-          ([l, v]) =>
-            `<div class="detail-item"><div class="di-label">${l}</div><div class="di-val">${v}</div></div>`,
-        )
-        .join("")}</div>
+      <div class="detail-grid">${filled.map(([l, v]) =>
+        `<div class="detail-item"><div class="di-label">${l}</div><div class="di-val">${v}</div></div>`
+      ).join("")}</div>
     </div>`;
   };
 
-  // Pitch turns section
+  // Pitch turns sections
   let pitchHtml = "";
   if (m.pitchTurns && m.pitchTurns.length) {
-    pitchHtml = `<div class="detail-section">
-      <div class="detail-section-title"><span>🔢</span>Turns per Pitch</div>
+    pitchHtml += `<div class="detail-section">
+      <div class="detail-section-title"><span>🔢</span>Winding — Turns per Pitch</div>
       <div class="detail-grid">
-        ${m.pitchTurns
-          .map(
-            (pt) =>
-              `<div class="detail-item"><div class="di-label">Pitch ${pt.pitch}</div><div class="di-val">${pt.turns} turns</div></div>`,
-          )
-          .join("")}
+        ${m.pitchTurns.map((pt) =>
+          `<div class="detail-item"><div class="di-label">Pitch ${pt.pitch}</div><div class="di-val">${pt.turns} turns</div></div>`
+        ).join("")}
+      </div>
+    </div>`;
+  }
+  if (m.startingPitchTurns && m.startingPitchTurns.length) {
+    pitchHtml += `<div class="detail-section">
+      <div class="detail-section-title"><span>🔴</span>Starting Coil — Turns per Pitch</div>
+      <div class="detail-grid">
+        ${m.startingPitchTurns.map((pt) =>
+          `<div class="detail-item"><div class="di-label">Pitch ${pt.pitch}</div><div class="di-val">${pt.turns} turns</div></div>`
+        ).join("")}
+      </div>
+    </div>`;
+  }
+  if (m.runningPitchTurns && m.runningPitchTurns.length) {
+    pitchHtml += `<div class="detail-section">
+      <div class="detail-section-title"><span>🟢</span>Running Coil — Turns per Pitch</div>
+      <div class="detail-grid">
+        ${m.runningPitchTurns.map((pt) =>
+          `<div class="detail-item"><div class="di-label">Pitch ${pt.pitch}</div><div class="di-val">${pt.turns} turns</div></div>`
+        ).join("")}
       </div>
     </div>`;
   }
@@ -616,12 +550,7 @@ function openDetail(id) {
       ["Rated Current", m.ratedCurrent],
       ["Frequency", m.ratedFrequency],
       ["Rated RPM", m.ratedRPM],
-      [
-        "Rated Power",
-        m.ratedPowerHP
-          ? m.ratedPowerHP + " HP / " + m.ratedPowerKW + " kW"
-          : "",
-      ],
+      ["Rated Power", m.ratedPowerHP ? m.ratedPowerHP + " HP / " + m.ratedPowerKW + " kW" : ""],
       ["Insulation Class", m.insulationClass],
       ["Efficiency", m.efficiency],
       ["Frame Size", m.frameSize],
@@ -640,35 +569,21 @@ function openDetail(id) {
       ["Wire Gauge (SWG)", m.wireGauge],
       ["Coil Weight", m.coilWeight ? m.coilWeight + " kg" : ""],
     ])}
+    ${m.phase === "Single" ? sec("Single Phase — Starting & Running Coil", "🔌", [
+      ["Starting Coil Turns", m.startingCoilTurns],
+      ["Running Coil Turns", m.runningCoilTurns],
+      ["Starting Coil Weight", m.startingCoilWeight ? m.startingCoilWeight + " kg" : ""],
+      ["Running Coil Weight", m.runningCoilWeight ? m.runningCoilWeight + " kg" : ""],
+      ["Capacitor Value", m.capacitorValue],
+    ]) : ""}
     ${pitchHtml}
-    ${
-      m.phase === "Single"
-        ? sec("Single Phase — Starting & Running Coil", "🔌", [
-            ["Starting Coil Turns", m.startingCoilTurns],
-            ["Running Coil Turns", m.runningCoilTurns],
-            [
-              "Starting Coil Weight",
-              m.startingCoilWeight ? m.startingCoilWeight + " kg" : "",
-            ],
-            [
-              "Running Coil Weight",
-              m.runningCoilWeight ? m.runningCoilWeight + " kg" : "",
-            ],
-            ["Capacitor Value", m.capacitorValue],
-          ])
-        : ""
-    }
-    ${
-      m.phase === "Three"
-        ? sec("Three Phase Electrical Details", "⚡", [
-            ["Line Voltage", m.lineVoltage],
-            ["Phase Voltage", m.phaseVoltage],
-            ["Line Current", m.lineCurrent],
-            ["Phase Current", m.phaseCurrent],
-            ["Star/Delta Connection", m.starDeltaConn],
-          ])
-        : ""
-    }
+    ${m.phase === "Three" ? sec("Three Phase Electrical Details", "⚡", [
+      ["Line Voltage", m.lineVoltage],
+      ["Phase Voltage", m.phaseVoltage],
+      ["Line Current", m.lineCurrent],
+      ["Phase Current", m.phaseCurrent],
+      ["Star/Delta Connection", m.starDeltaConn],
+    ]) : ""}
     ${sec("Mechanical Details", "⚙️", [
       ["Shaft Diameter", m.shaftDiameter],
       ["Shaft Length", m.shaftLength],
@@ -687,9 +602,7 @@ function openDetail(id) {
   `;
   document.getElementById("detailModal").style.display = "flex";
 }
-function closeDetail() {
-  document.getElementById("detailModal").style.display = "none";
-}
+function closeDetail() { document.getElementById("detailModal").style.display = "none"; }
 function closeDetailOutside(e) {
   if (e.target === document.getElementById("detailModal")) closeDetail();
 }
@@ -701,8 +614,7 @@ let deleteId = null;
 function openDeleteConfirm(id) {
   deleteId = id;
   const m = getMotors().find((x) => x.id === id);
-  document.getElementById("confirmMsg").textContent =
-    `"${m?.brand} ${m?.frameSize || ""}" will be permanently deleted.`;
+  document.getElementById("confirmMsg").textContent = `"${m?.brand} ${m?.frameSize || ""}" will be permanently deleted.`;
   document.getElementById("confirmModal").style.display = "flex";
 }
 function closeConfirm() {
@@ -724,18 +636,9 @@ function changePassword() {
   const cur = document.getElementById("curPass").value;
   const nw = document.getElementById("newPass").value;
   const cn = document.getElementById("conPass").value;
-  if (hashStr(cur) !== getPass()) {
-    showToast("Current password is incorrect", "err");
-    return;
-  }
-  if (nw.length < 6) {
-    showToast("New password must be at least 6 characters", "err");
-    return;
-  }
-  if (nw !== cn) {
-    showToast("Passwords do not match", "err");
-    return;
-  }
+  if (hashStr(cur) !== getPass()) { showToast("Current password is incorrect", "err"); return; }
+  if (nw.length < 6) { showToast("New password must be at least 6 characters", "err"); return; }
+  if (nw !== cn) { showToast("Passwords do not match", "err"); return; }
   localStorage.setItem(LS_PASS, hashStr(nw));
   document.getElementById("curPass").value = "";
   document.getElementById("newPass").value = "";
@@ -743,9 +646,7 @@ function changePassword() {
   showToast("✅ Password changed successfully");
 }
 function clearAllData() {
-  if (
-    confirm("Are you sure? This will delete ALL motor records permanently!")
-  ) {
+  if (confirm("Are you sure? This will delete ALL motor records permanently!")) {
     localStorage.removeItem(LS_MOTORS);
     refreshAll();
     showToast("All data cleared", "warn");
@@ -759,38 +660,24 @@ function exportCSV() {
   const motors = getMotors();
   const headers = [...FIELDS, "pitchTurns"];
   const rows = motors.map((m) =>
-    headers
-      .map((f) => {
-        const val =
-          f === "pitchTurns"
-            ? (m.pitchTurns || [])
-                .map((pt) => `${pt.pitch}:${pt.turns}`)
-                .join(" | ")
-            : (m[f] || "").toString();
-        return `"${val.replace(/"/g, '""')}"`;
-      })
-      .join(","),
+    headers.map((f) => {
+      const val = f === "pitchTurns"
+        ? (m.pitchTurns || []).map((pt) => `${pt.pitch}:${pt.turns}`).join(" | ")
+        : (m[f] || "").toString();
+      return `"${val.replace(/"/g, '""')}"`;
+    }).join(",")
   );
-  dl(
-    "srew_motors_export.csv",
-    "text/csv",
-    [headers.join(","), ...rows].join("\n"),
-  );
+  dl("srew_motors_export.csv", "text/csv", [headers.join(","), ...rows].join("\n"));
   showToast("📊 CSV exported");
 }
 function exportJSON() {
-  dl(
-    "srew_motors_backup.json",
-    "application/json",
-    JSON.stringify(getMotors(), null, 2),
-  );
+  dl("srew_motors_backup.json", "application/json", JSON.stringify(getMotors(), null, 2));
   showToast("💾 JSON backup downloaded");
 }
 function printReport() {
   const motors = getMotors();
   const w = window.open("", "_blank");
-  w.document
-    .write(`<html><head><title>Shree Ram Electric Works – Motor Report</title>
+  w.document.write(`<html><head><title>Shree Ram Electric Works – Motor Report</title>
     <style>body{font-family:sans-serif;padding:20px;font-size:12px}h1{font-size:18px;margin-bottom:4px}
     table{width:100%;border-collapse:collapse;margin-bottom:20px}th,td{border:1px solid #ddd;padding:6px 8px;text-align:left}
     th{background:#0d1b2a;color:#fff}tr:nth-child(even){background:#f5f5f5}.meta{color:#666;font-size:11px;margin-bottom:20px}</style>
@@ -801,52 +688,23 @@ function printReport() {
       <th>#</th><th>Brand</th><th>HP</th><th>kW</th><th>RPM</th><th>Voltage</th>
       <th>Phase</th><th>Type</th><th>Gauge</th><th>Turns</th><th>Coil Wt</th><th>Frame</th>
     </tr></thead><tbody>
-    ${motors
-      .map(
-        (m, i) => `<tr>
+    ${motors.map((m, i) => `<tr>
       <td>${i + 1}</td><td>${m.brand || ""}</td><td>${m.ratedPowerHP || ""}</td>
       <td>${m.ratedPowerKW || ""}</td><td>${m.ratedRPM || ""}</td><td>${m.ratedVoltage || ""}</td>
       <td>${m.phase || ""}</td><td>${m.motorType || ""}</td><td>${m.wireGauge || ""}</td>
       <td>${m.totalCoilTurns || ""}</td><td>${m.coilWeight || ""}</td><td>${m.frameSize || ""}</td>
-    </tr>`,
-      )
-      .join("")}
+    </tr>`).join("")}
     </tbody></table></body></html>`);
   w.document.close();
   w.print();
 }
 function copyTable() {
   const motors = getMotors();
-  const hdrs = [
-    "Brand",
-    "HP",
-    "kW",
-    "RPM",
-    "Voltage",
-    "Phase",
-    "Type",
-    "Wire Gauge",
-    "Coil Turns",
-    "Coil Weight",
-    "Frame",
-  ];
+  const hdrs = ["Brand", "HP", "kW", "RPM", "Voltage", "Phase", "Type", "Wire Gauge", "Coil Turns", "Coil Weight", "Frame"];
   const rows = motors.map((m) =>
-    [
-      m.brand,
-      m.ratedPowerHP,
-      m.ratedPowerKW,
-      m.ratedRPM,
-      m.ratedVoltage,
-      m.phase,
-      m.motorType,
-      m.wireGauge,
-      m.totalCoilTurns,
-      m.coilWeight,
-      m.frameSize,
-    ].join("\t"),
+    [m.brand, m.ratedPowerHP, m.ratedPowerKW, m.ratedRPM, m.ratedVoltage, m.phase, m.motorType, m.wireGauge, m.totalCoilTurns, m.coilWeight, m.frameSize].join("\t")
   );
-  navigator.clipboard
-    .writeText([hdrs.join("\t"), ...rows].join("\n"))
+  navigator.clipboard.writeText([hdrs.join("\t"), ...rows].join("\n"))
     .then(() => showToast("📋 Table copied to clipboard"));
 }
 function dl(name, type, content) {
@@ -859,22 +717,10 @@ function dl(name, type, content) {
 // ============================
 // IMPORT
 // ============================
-function dzOver(e) {
-  e.preventDefault();
-  document.getElementById("dropZone").classList.add("drag-over");
-}
-function dzLeave() {
-  document.getElementById("dropZone").classList.remove("drag-over");
-}
-function dzDrop(e) {
-  e.preventDefault();
-  dzLeave();
-  const f = e.dataTransfer.files[0];
-  if (f) readJSON(f);
-}
-function handleImport(inp) {
-  if (inp.files[0]) readJSON(inp.files[0]);
-}
+function dzOver(e) { e.preventDefault(); document.getElementById("dropZone").classList.add("drag-over"); }
+function dzLeave() { document.getElementById("dropZone").classList.remove("drag-over"); }
+function dzDrop(e) { e.preventDefault(); dzLeave(); const f = e.dataTransfer.files[0]; if (f) readJSON(f); }
+function handleImport(inp) { if (inp.files[0]) readJSON(inp.files[0]); }
 function readJSON(file) {
   const r = new FileReader();
   r.onload = (e) => {
@@ -889,23 +735,17 @@ function readJSON(file) {
             <button class="btn btn-red" onclick='importReplace(${JSON.stringify(data).replace(/'/g, "&#39;")})'>Replace All</button>
           </div>
         </div>`;
-    } catch {
-      showToast("❌ Invalid JSON file", "err");
-    }
+    } catch { showToast("❌ Invalid JSON file", "err"); }
   };
   r.readAsText(file);
 }
 function importMerge(data) {
   const ex = getMotors();
   const merged = [...ex, ...data.filter((d) => !ex.find((e) => e.id === d.id))];
-  saveMotors(merged);
-  refreshAll();
-  showToast(`✅ Merged ${data.length} records`);
+  saveMotors(merged); refreshAll(); showToast(`✅ Merged ${data.length} records`);
 }
 function importReplace(data) {
-  saveMotors(data);
-  refreshAll();
-  showToast(`✅ Replaced with ${data.length} records`);
+  saveMotors(data); refreshAll(); showToast(`✅ Replaced with ${data.length} records`);
 }
 
 // ============================
@@ -913,10 +753,8 @@ function importReplace(data) {
 // ============================
 function showToast(msg, type = "ok") {
   const t = document.createElement("div");
-  t.className =
-    "toast" + (type === "err" ? " err" : type === "warn" ? " warn" : "");
-  t.innerHTML =
-    (type === "err" ? "❌ " : type === "warn" ? "⚠️ " : "✅ ") + msg;
+  t.className = "toast" + (type === "err" ? " err" : type === "warn" ? " warn" : "");
+  t.innerHTML = (type === "err" ? "❌ " : type === "warn" ? "⚠️ " : "✅ ") + msg;
   document.getElementById("toastWrap").appendChild(t);
   setTimeout(() => {
     t.style.opacity = "0";
