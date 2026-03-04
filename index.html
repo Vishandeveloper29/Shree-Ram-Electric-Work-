@@ -150,26 +150,26 @@
                     <div class="export-card">
                         <div class="ec-icon">📊</div>
                         <h3>Export CSV</h3>
-                        <p>Download all motor data as spreadsheet</p><button class="btn btn-green"
-                            onclick="exportCSV()">⬇ Download CSV</button>
+                        <p>Download all motor data as spreadsheet</p>
+                        <button class="btn btn-green" onclick="exportCSV()">⬇ Download CSV</button>
                     </div>
                     <div class="export-card">
                         <div class="ec-icon">💾</div>
                         <h3>Export JSON</h3>
-                        <p>Full data backup in JSON format</p><button class="btn btn-navy" onclick="exportJSON()">⬇
-                            Download JSON</button>
+                        <p>Full data backup in JSON format</p>
+                        <button class="btn btn-navy" onclick="exportJSON()">⬇ Download JSON</button>
                     </div>
                     <div class="export-card">
                         <div class="ec-icon">🖨️</div>
                         <h3>Print Report</h3>
-                        <p>Open a clean printable report</p><button class="btn btn-light" onclick="printReport()">🖨
-                            Print / PDF</button>
+                        <p>Open a clean printable report</p>
+                        <button class="btn btn-light" onclick="printReport()">🖨 Print / PDF</button>
                     </div>
                     <div class="export-card">
                         <div class="ec-icon">📋</div>
                         <h3>Copy Table</h3>
-                        <p>Copy data to paste in Excel / Sheets</p><button class="btn btn-light"
-                            onclick="copyTable()">📋 Copy TSV</button>
+                        <p>Copy data to paste in Excel / Sheets</p>
+                        <button class="btn btn-light" onclick="copyTable()">📋 Copy TSV</button>
                     </div>
                 </div>
                 <h3
@@ -238,10 +238,6 @@
                                 placeholder="e.g. Crompton" /></div>
                         <div class="fg"><label>Manufacturer</label><input type="text" id="f_manufacturer"
                                 placeholder="e.g. Crompton Greaves" /></div>
-                        <div class="fg"><label>Model Number *</label><input type="text" id="f_modelNumber"
-                                placeholder="e.g. GF2054" /></div>
-                        <div class="fg"><label>Serial Number</label><input type="text" id="f_serialNumber"
-                                placeholder="e.g. SN-2024-001" /></div>
                         <div class="fg"><label>Motor Type *</label><select id="f_motorType">
                                 <option value="">Select</option>
                                 <option>AC</option>
@@ -259,22 +255,13 @@
                         <div class="fg"><label>Rated Frequency (Hz)</label><input type="text" id="f_ratedFrequency"
                                 placeholder="e.g. 50Hz" /></div>
                         <div class="fg"><label>Rated RPM *</label><input type="number" id="f_ratedRPM"
-                                placeholder="e.g. 1440" oninput="" /></div>
+                                placeholder="e.g. 1440" /></div>
                         <div class="fg"><label>Rated Power (HP) *</label><input type="number" id="f_ratedPowerHP"
                                 step="0.01" placeholder="e.g. 1.5" oninput="autoKW()" /></div>
                         <div class="fg"><label>Rated Power (kW) <span
                                     style="color:var(--orange);font-size:.7rem">Auto</span></label><input type="text"
                                 id="f_ratedPowerKW" placeholder="Auto calculated" readonly style="background:#f8fafd" />
                         </div>
-                        <div class="fg"><label>Duty Type</label><select id="f_dutyType">
-                                <option value="">Select</option>
-                                <option>S1</option>
-                                <option>S2</option>
-                                <option>S3</option>
-                                <option>S4</option>
-                                <option>S5</option>
-                                <option>S6</option>
-                            </select></div>
                         <div class="fg"><label>Insulation Class</label><select id="f_insulationClass">
                                 <option value="">Select</option>
                                 <option>A</option>
@@ -282,36 +269,10 @@
                                 <option>F</option>
                                 <option>H</option>
                             </select></div>
-                        <div class="fg"><label>IP Rating</label><select id="f_ipRating">
-                                <option value="">Select</option>
-                                <option>IP44</option>
-                                <option>IP54</option>
-                                <option>IP55</option>
-                                <option>IP65</option>
-                                <option>IP66</option>
-                            </select></div>
-                        <div class="fg"><label>Power Factor (Cos φ)</label><input type="text" id="f_powerFactor"
-                                placeholder="e.g. 0.85" /></div>
                         <div class="fg"><label>Efficiency %</label><input type="text" id="f_efficiency"
                                 placeholder="e.g. 87%" /></div>
-                        <div class="fg"><label>Ambient Temp (°C)</label><input type="text" id="f_ambientTemp"
-                                placeholder="e.g. 40°C" /></div>
-                        <div class="fg"><label>Service Factor</label><input type="text" id="f_serviceFactor"
-                                placeholder="e.g. 1.15" /></div>
                         <div class="fg"><label>Frame Size</label><input type="text" id="f_frameSize"
                                 placeholder="e.g. D100L" /></div>
-                        <div class="fg"><label>Mounting Type</label><select id="f_mountingType">
-                                <option value="">Select</option>
-                                <option>B3</option>
-                                <option>B5</option>
-                                <option>B14</option>
-                                <option>B34</option>
-                                <option>B35</option>
-                            </select></div>
-                        <div class="fg"><label>Country of Origin</label><input type="text" id="f_countryOrigin"
-                                placeholder="e.g. India" /></div>
-                        <div class="fg"><label>Mfg. Date</label><input type="text" id="f_mfgDate"
-                                placeholder="e.g. Jan 2022" /></div>
                     </div>
                 </div>
 
@@ -319,30 +280,8 @@
                 <div class="form-section">
                     <div class="form-section-title"><span class="fs-icon">⚡</span>B. Electrical Specifications</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Starting Current (A)</label><input type="text" id="f_startingCurrent"
-                                placeholder="e.g. 45A" /></div>
                         <div class="fg"><label>Running Current (A)</label><input type="text" id="f_runningCurrent"
                                 placeholder="e.g. 7.2A" /></div>
-                        <div class="fg"><label>Locked Rotor Current (A)</label><input type="text"
-                                id="f_lockedRotorCurrent" placeholder="e.g. 52A" /></div>
-                        <div class="fg"><label>Breakdown Torque (N·m)</label><input type="text" id="f_breakdownTorque"
-                                placeholder="e.g. 28 N·m" /></div>
-                        <div class="fg"><label>Full Load Torque (N·m)</label><input type="text" id="f_fullLoadTorque"
-                                placeholder="e.g. 14 N·m" /></div>
-                        <div class="fg"><label>Winding Resistance R-Phase (Ω)</label><input type="text"
-                                id="f_windingResR" placeholder="e.g. 12.4Ω" /></div>
-                        <div class="fg"><label>Winding Resistance Y-Phase (Ω)</label><input type="text"
-                                id="f_windingResY" placeholder="e.g. 12.3Ω" /></div>
-                        <div class="fg"><label>Winding Resistance B-Phase (Ω)</label><input type="text"
-                                id="f_windingResB" placeholder="e.g. 12.5Ω" /></div>
-                        <div class="fg"><label>Megger Test Value (MΩ)</label><input type="text" id="f_meggerTest"
-                                placeholder="e.g. &gt;100 MΩ" /></div>
-                        <div class="fg"><label>Continuity Test Result</label><select id="f_continuityTest">
-                                <option value="">Select</option>
-                                <option>Pass</option>
-                                <option>Fail</option>
-                                <option>Not Tested</option>
-                            </select></div>
                     </div>
                 </div>
 
@@ -352,30 +291,14 @@
                     <div class="form-grid">
                         <div class="fg"><label>Stator Slot Count</label><input type="number" id="f_statorSlots"
                                 placeholder="e.g. 36" /></div>
-                        <div class="fg"><label>Rotor Slot Count</label><input type="number" id="f_rotorSlots"
-                                placeholder="e.g. 28" /></div>
                         <div class="fg"><label>Slot Length (mm)</label><input type="text" id="f_slotLength"
                                 placeholder="e.g. 45mm" /></div>
-                        <div class="fg"><label>Rotor Bore Dia (mm)</label><input type="text" id="f_rotorBore"
-                                placeholder="e.g. 72mm" /></div>
-                        <div class="fg"><label>Core Length (mm)</label><input type="text" id="f_coreLength"
-                                placeholder="e.g. 80mm" /></div>
-                        <div class="fg"><label>Stack Height (mm)</label><input type="text" id="f_stackHeight"
-                                placeholder="e.g. 100mm" /></div>
-                        <div class="fg"><label>Air Gap (mm)</label><input type="text" id="f_airGap"
-                                placeholder="e.g. 0.3mm" /></div>
                         <div class="fg"><label>Total Coil Turns</label><input type="number" id="f_totalCoilTurns"
                                 placeholder="e.g. 720" /></div>
                         <div class="fg"><label>Turns Per Coil</label><input type="number" id="f_turnsPerCoil"
                                 placeholder="e.g. 90" /></div>
                         <div class="fg"><label>Coil Pitch</label><input type="text" id="f_coilPitch"
                                 placeholder="e.g. 1-8" /></div>
-                        <div class="fg"><label>Winding Type</label><select id="f_windingType">
-                                <option value="">Select</option>
-                                <option>Lap</option>
-                                <option>Wave</option>
-                                <option>Concentric</option>
-                            </select></div>
                         <div class="fg"><label>Winding Connection</label><select id="f_windingConnection">
                                 <option value="">Select</option>
                                 <option>Star</option>
@@ -389,22 +312,18 @@
                             </select></div>
                         <div class="fg"><label>Wire Gauge (SWG) *</label><input type="text" id="f_wireGauge"
                                 placeholder="e.g. 22 SWG" /></div>
-                        <div class="fg"><label>Wire Diameter (mm)</label><input type="text" id="f_wireDiameter"
-                                placeholder="e.g. 0.71mm" /></div>
                         <div class="fg"><label>Coil Weight (kg) *</label><input type="text" id="f_coilWeight"
                                 placeholder="e.g. 1.2kg" /></div>
-                        <div class="fg"><label>Total Copper Weight (kg)</label><input type="text"
-                                id="f_totalCopperWeight" placeholder="e.g. 1.05kg" /></div>
-                        <div class="fg"><label>Insulation Paper Type</label><input type="text" id="f_insulationPaper"
-                                placeholder="e.g. Nomex 410" /></div>
-                        <div class="fg"><label>Slot Insulation Thick (mm)</label><input type="text"
-                                id="f_slotInsulThick" placeholder="e.g. 0.25mm" /></div>
-                        <div class="fg"><label>Varnish Type</label><input type="text" id="f_varnishType"
-                                placeholder="e.g. Class F Epoxy" /></div>
-                        <div class="fg"><label>Baking Temp (°C)</label><input type="text" id="f_bakingTemp"
-                                placeholder="e.g. 130°C" /></div>
-                        <div class="fg"><label>Baking Time (hrs)</label><input type="text" id="f_bakingTime"
-                                placeholder="e.g. 6 hrs" /></div>
+                    </div>
+
+                    <!-- Turns per Pitch dynamic section -->
+                    <div style="margin-top:18px">
+                        <div class="form-section-title"
+                            style="font-size:.95rem;border-bottom:1px dashed var(--orange);margin-bottom:14px"><span
+                                class="fs-icon">🔢</span>Turns per Pitch</div>
+                        <div id="pitchTurnsContainer" style="display:flex;flex-direction:column;gap:10px"></div>
+                        <button type="button" class="btn btn-light" style="margin-top:12px;font-size:.82rem"
+                            onclick="addPitchRow()">➕ Add Pitch</button>
                     </div>
                 </div>
 
@@ -417,29 +336,12 @@
                                 placeholder="e.g. 480" /></div>
                         <div class="fg"><label>Running Coil Turns</label><input type="number" id="f_runningCoilTurns"
                                 placeholder="e.g. 240" /></div>
-                        <div class="fg"><label>Starting Coil Resistance (Ω)</label><input type="text"
-                                id="f_startingCoilResistance" placeholder="e.g. 28Ω" /></div>
-                        <div class="fg"><label>Running Coil Resistance (Ω)</label><input type="text"
-                                id="f_runningCoilResistance" placeholder="e.g. 12Ω" /></div>
                         <div class="fg"><label>Starting Coil Weight (kg)</label><input type="text"
                                 id="f_startingCoilWeight" placeholder="e.g. 0.45kg" /></div>
                         <div class="fg"><label>Running Coil Weight (kg)</label><input type="text"
                                 id="f_runningCoilWeight" placeholder="e.g. 0.75kg" /></div>
-                        <div class="fg"><label>Capacitor Type</label><select id="f_capacitorType">
-                                <option value="">Select</option>
-                                <option>Start</option>
-                                <option>Run</option>
-                                <option>Start + Run</option>
-                            </select></div>
                         <div class="fg"><label>Capacitor Value (µF)</label><input type="text" id="f_capacitorValue"
                                 placeholder="e.g. 25µF / 4µF" /></div>
-                        <div class="fg"><label>Capacitor Voltage Rating</label><input type="text"
-                                id="f_capacitorVoltage" placeholder="e.g. 250V / 400V" /></div>
-                        <div class="fg"><label>Centrifugal Switch</label><select id="f_centrifugalSwitch">
-                                <option value="">Select</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select></div>
                     </div>
                 </div>
 
@@ -462,8 +364,6 @@
                                 <option>Delta</option>
                                 <option>Star-Delta Starter</option>
                             </select></div>
-                        <div class="fg"><label>Terminal Markings</label><input type="text" id="f_terminalMarkings"
-                                placeholder="e.g. U1,U2,V1,V2,W1,W2" /></div>
                     </div>
                 </div>
 
@@ -479,12 +379,10 @@
                                 placeholder="e.g. 6305" /></div>
                         <div class="fg"><label>Bearing Number Rear</label><input type="text" id="f_bearingRear"
                                 placeholder="e.g. 6203" /></div>
-                        <div class="fg"><label>Cooling Type</label><input type="text" id="f_coolingType"
-                                placeholder="e.g. IC411 / TEFC" /></div>
-                        <div class="fg"><label>Fan Type</label><input type="text" id="f_fanType"
-                                placeholder="e.g. External" /></div>
-                        <div class="fg"><label>Fan Cover Type</label><input type="text" id="f_fanCoverType"
-                                placeholder="e.g. End Cover" /></div>
+                        <div class="fg"><label>Fan Size (mm)</label><input type="text" id="f_fanSize"
+                                placeholder="e.g. 180mm" /></div>
+                        <div class="fg"><label>Fan Cover Size (mm)</label><input type="text" id="f_fanCoverSize"
+                                placeholder="e.g. 200mm" /></div>
                         <div class="fg"><label>Total Motor Weight (kg)</label><input type="text" id="f_motorWeight"
                                 placeholder="e.g. 12.5kg" /></div>
                         <div class="fg"><label>Body Material</label><select id="f_bodyMaterial">
@@ -500,30 +398,10 @@
                 <div class="form-section">
                     <div class="form-section-title"><span class="fs-icon">🔧</span>G. Repair & Service History</div>
                     <div class="form-grid">
-                        <div class="fg"><label>Last Rewinding Date</label><input type="date" id="f_lastRewindDate" />
-                        </div>
-                        <div class="fg"><label>Rewinding Done By</label><input type="text" id="f_rewindingBy"
-                                placeholder="e.g. Shree Ram Electric" /></div>
                         <div class="fg"><label>Old Coil Weight (kg)</label><input type="text" id="f_oldCoilWeight"
                                 placeholder="e.g. 1.1kg" /></div>
                         <div class="fg"><label>New Coil Weight (kg)</label><input type="text" id="f_newCoilWeight"
                                 placeholder="e.g. 1.2kg" /></div>
-                        <div class="fg"><label>Bearing Changed</label><select id="f_bearingChanged">
-                                <option value="">Select</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select></div>
-                        <div class="fg"><label>Capacitor Changed</label><select id="f_capacitorChanged">
-                                <option value="">Select</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select></div>
-                        <div class="fg"><label>Test Report After Repair</label><select id="f_testReport">
-                                <option value="">Select</option>
-                                <option>Pass</option>
-                                <option>Fail</option>
-                                <option>Pending</option>
-                            </select></div>
                         <div class="fg full"><label>Notes / Observations</label><textarea id="f_notes"
                                 placeholder="Any additional notes, observations, or special instructions..."></textarea>
                         </div>
@@ -566,8 +444,7 @@
         </div>
     </div>
 
-    <script src="admin.js">   </script>
+    <script src="admin.js"></script>
 </body>
-
 
 </html>
